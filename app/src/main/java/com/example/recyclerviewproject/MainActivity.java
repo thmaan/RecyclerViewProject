@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -77,9 +78,12 @@ public class MainActivity extends AppCompatActivity {
     }
     public void createExampleList(){
         mExampleList = new ArrayList<>();
-        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Line 1","Line 2"));
-        mExampleList.add(new ExampleItem(R.drawable.ic_audiotrack, "Line 3","Line 4"));
-        mExampleList.add(new ExampleItem(R.drawable.ic_attach_money, "Line 5","Line 6"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Title ","Description "));
+        mExampleList.add(new ExampleItem(R.drawable.ic_audiotrack, "Title 1","Description 1"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_attach_money, "Title 2","Description 2"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_android, "Title 3","Description 3"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_audiotrack, "Title 4","Description 4"));
+        mExampleList.add(new ExampleItem(R.drawable.ic_attach_money, "Title 5","Description 5"));
     }
     public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerview);
@@ -89,6 +93,18 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+
+            @Override
+            public void onDeleteClick(int position) {
+                removeItem(position);
+            }
+        });
 
     }
     public void setButtons(){
